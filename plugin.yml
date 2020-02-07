@@ -1,0 +1,13 @@
+name: AkEffect
+version: 1.3.0
+author: coder
+main: org.akteam.akeffect.AkEffect
+api-version: 1.14
+
+commands:
+  fuckme:
+    description: Create a fake explore on the player commanding but do damage to other players around.
+    usage: /fuckme
+  shazam:
+    description: Make player a superman with strong positive effects.Need to have food level 16 at least.
+    usage: /shazam
