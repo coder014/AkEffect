@@ -7,5 +7,6 @@ public class AkEffect extends JavaPlugin {
 	public void onEnable() {
 		this.getCommand("fuckme").setExecutor(new CommandFuckme(new EntityDamageListener(this)));
 		this.getCommand("shazam").setExecutor(new CommandShazam(this));
+		this.getCommand("rocket").setExecutor(new CommandRocket(this));
 	}
 }

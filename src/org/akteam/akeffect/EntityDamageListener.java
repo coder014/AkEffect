@@ -9,21 +9,20 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-import static org.bukkit.Bukkit.*;
-
 public final class EntityDamageListener implements Listener {
-	private HashSet<Player> players = new HashSet<>();
+	private final HashSet<Player> players = new HashSet<>();
 	
 	public void invoke(@NotNull Player player) {
 		this.players.add(player);
 	}
 	
 	public EntityDamageListener(@NotNull Plugin plugin) {
-		getServer().getPluginManager().registerEvents(this, plugin);
+		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	}
 	
 	@EventHandler
 	public void onEntityDamage(EntityDamageEvent event) {
+		//any other player will get damage
 		if (event.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) {
 			if (!this.players.isEmpty()) {
 				if (event.getEntityType() == EntityType.PLAYER ) {

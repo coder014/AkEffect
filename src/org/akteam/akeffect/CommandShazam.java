@@ -1,9 +1,7 @@
 package org.akteam.akeffect;
 
 import java.util.HashSet;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,10 +13,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public final class CommandShazam implements CommandExecutor {
 	private final Plugin plugin;
-	final HashSet<PotionEffect> s = new HashSet<>();
+	final HashSet<PotionEffect> s = new HashSet<>(); //Shazams' list
 	public CommandShazam(Plugin plugin) {
 		this.plugin = plugin;
 		
+		//initialize potion effects
 		s.add(new PotionEffect(PotionEffectType.SPEED, effectTime*20, 3));
 		s.add(new PotionEffect(PotionEffectType.REGENERATION, effectTime*20, 4));
 		s.add(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, effectTime*20, 3));
@@ -40,7 +39,7 @@ public final class CommandShazam implements CommandExecutor {
 		return false;
 	}
 	
-	private HashSet<String> shazams = new HashSet<>();
+	private final HashSet<String> shazams = new HashSet<>();
 	final int effectTime = 60;
 	
 	private void shazalize(Player player) {
@@ -50,6 +49,7 @@ public final class CommandShazam implements CommandExecutor {
 			player.setSaturation(0);
 			player.addPotionEffects(s);
 			this.strike(player);
+			//get the powers,pay the price
 			player.sendMessage(ChatColor.BLUE + "You are a Shazam now.");
 			player.chat(ChatColor.RED + "Shazam!");
 			new BukkitRunnable() {
@@ -63,9 +63,10 @@ public final class CommandShazam implements CommandExecutor {
 	
 	private void unshazalize(Player player) {
 		this.shazams.remove(player.getName());
-		if (Bukkit.getServer().getPlayer(player.getName()) == player) {
+		if (plugin.getServer().getPlayer(player.getName()) == player) {
 			player.setSaturation(0);
 			player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 2*effectTime * 20, 4));
+			//pay more price
 			player.sendMessage(ChatColor.GRAY + "You are not a Shazam anymore.");
 		}
 	}
