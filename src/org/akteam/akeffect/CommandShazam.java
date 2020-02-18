@@ -6,15 +6,15 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public final class CommandShazam implements CommandExecutor {
-	private final Plugin plugin;
+	private final JavaPlugin plugin;
 	final HashSet<PotionEffect> s = new HashSet<>(); //Shazams' list
-	public CommandShazam(Plugin plugin) {
+	public CommandShazam(JavaPlugin plugin) {
 		this.plugin = plugin;
 		
 		//initialize potion effects
