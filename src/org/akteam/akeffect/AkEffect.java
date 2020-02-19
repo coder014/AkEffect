@@ -22,7 +22,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class AkEffect extends JavaPlugin {
 	@Override
 	public void onEnable() {
-		this.getCommand("fuckme").setExecutor(new CommandFuckme(new EntityDamageListener(this)));
+		this.saveDefaultConfig();
+		
+		this.getCommand("akeffect").setExecutor(new PluginController(this));
+		this.getCommand("fuckme").setExecutor(new CommandFuckme(this));
 		this.getCommand("shazam").setExecutor(new CommandShazam(this));
 		this.getCommand("rocket").setExecutor(new CommandRocket(this));
 	}

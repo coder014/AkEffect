@@ -1,10 +1,13 @@
 name: AkEffect
-version: 1.4.2
+version: 1.4.3
 author: coder
 main: org.akteam.akeffect.AkEffect
 api-version: 1.14
 
 commands:
+  akeffect:
+    description: Control this plugin.
+    usage: /akeffect <reload>
   fuckme:
     description: Create a fake explore on the player commanding but do damage to other players around.
     usage: /fuckme

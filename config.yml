@@ -1,0 +1,10 @@
+rocket:
+  agc: 0.5
+  speed: 2.0
+  spread: 12.0
+  height: 20
+  checktime: 10
+fuckme:
+  power: 4.0
+Shazam:
+  effecttime: 60

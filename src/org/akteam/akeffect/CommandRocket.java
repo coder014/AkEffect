@@ -39,12 +39,17 @@ public class CommandRocket implements CommandExecutor {
 			Player player = (Player) sender;
 			Location location = player.getLocation();
 			Vector vector = location.getDirection();
-			Arrow arrow = player.getWorld().spawnArrow(location.add(0L, 20L, 0L), vector.setY(0), 2.0F, 12F);
+			long height = plugin.getConfig().getLong("rocket.height");
+			float speed = (float)plugin.getConfig().getDouble("rocket.speed");
+			float spread = (float)plugin.getConfig().getDouble("rocket.spread");
+			Arrow arrow = player.getWorld().spawnArrow(location.add(0L, height, 0L), vector.setY(0), speed, spread);
 			arrow.setFireTicks(Integer.MAX_VALUE);
 			arrow.addPassenger(player);
 			player.sendMessage(ChatColor.RED + "Launch!");
 			//shoot a fired arrow from above the player and make the player ride on it
-			new ArrowPilot(arrow, player).runTaskTimer(this.plugin, 0L, 10L);
+			double agc = plugin.getConfig().getDouble("rocket.agc");
+			long checktime = plugin.getConfig().getLong("rocket.checktime");
+			new ArrowPilot(arrow, player, agc).runTaskTimer(plugin, 0L, checktime);
 			return true;
 		}
 		return false;

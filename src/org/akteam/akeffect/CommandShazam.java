@@ -37,6 +37,7 @@ public final class CommandShazam implements CommandExecutor {
 	private final List<PotionEffect> l = new ArrayList<>(); //potion effects list
 	public CommandShazam(JavaPlugin plugin) {
 		this.plugin = plugin;
+		this.effectTime = plugin.getConfig().getInt("Shazam.effecttime");
 		
 		//initialize potion effects
 		l.add(new PotionEffect(PotionEffectType.SPEED, effectTime*20, 3));
@@ -54,22 +55,22 @@ public final class CommandShazam implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String alias, String[] args) {
 		if (sender instanceof Player) {
-			this.shazalize((Player) sender);
+			shazalize((Player) sender);
 			return true;
 		}
 		return false;
 	}
 	
 	private final Set<String> shazams = new HashSet<>();  //Shazams list
-	private final int effectTime = 60;
+	private final int effectTime;
 	
 	private void shazalize(Player player) {
-		if (this.canShazalize(player)) {
-			this.shazams.add(player.getName());
+		if (canShazalize(player)) {
+			shazams.add(player.getName());
 			player.setFoodLevel(player.getFoodLevel() - 12);
 			player.setSaturation(0);
 			player.addPotionEffects(l);
-			this.strike(player);
+			strike(player);
 			//get the powers,pay the price
 			player.sendMessage(ChatColor.BLUE + "You are a Shazam now.");
 			player.chat(ChatColor.RED + "Shazam!");
@@ -83,7 +84,7 @@ public final class CommandShazam implements CommandExecutor {
 	}
 	
 	private void unshazalize(Player player) {
-		this.shazams.remove(player.getName());
+		shazams.remove(player.getName());
 		if (plugin.getServer().getPlayer(player.getName()) == player) { //else player is offline
 			player.setSaturation(0);
 			player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 2*effectTime * 20, 4));
@@ -93,7 +94,7 @@ public final class CommandShazam implements CommandExecutor {
 	}
 	
 	private boolean canShazalize(Player player) {
-		if (this.shazams.contains(player.getName())) {
+		if (shazams.contains(player.getName())) {
 			player.sendMessage("You have already been a Shazam!");
 			return false;
 		} else if (player.getFoodLevel() < 16) {

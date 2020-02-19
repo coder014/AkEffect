@@ -17,30 +17,30 @@
 
 package org.akteam.akeffect;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class CommandFuckme implements CommandExecutor {
+public class PluginController implements CommandExecutor {
 	private final JavaPlugin plugin;
-	private final EntityDamageListener listener;
-	public CommandFuckme(JavaPlugin plugin) {
+	public PluginController(JavaPlugin plugin) {
 		this.plugin = plugin;
-		this.listener = new EntityDamageListener(plugin);
 	}
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String alias, String[] args) {
-		if (sender instanceof Player) {
-			Player player = (Player) sender;
-			listener.invoke(player);
-			float power = (float)plugin.getConfig().getDouble("fuckme.power");
-			player.getWorld().createExplosion(player.getLocation(), power, false, false);
-			player.chat("Come and fuck me!");
-			return true;
+		if(args.length<1) return false;
+		switch(args[0]) {
+			case "reload": {
+				plugin.saveDefaultConfig();
+				plugin.reloadConfig();
+				plugin.getCommand("shazam").setExecutor(new CommandShazam(plugin));
+				plugin.getServer().broadcastMessage(ChatColor.RED + "Plugin [AkEffect] has been self-reloaded!");
+				return true;
+			}
+			default: return false;
 		}
-		return false;
 	}
 }

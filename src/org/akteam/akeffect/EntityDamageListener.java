@@ -31,7 +31,7 @@ public final class EntityDamageListener implements Listener {
 	private final Set<String> players = new HashSet<>();
 	
 	public void invoke(Player player) {
-		this.players.add(player.getName());
+		players.add(player.getName());
 	}
 	
 	public EntityDamageListener(JavaPlugin plugin) {
@@ -42,12 +42,12 @@ public final class EntityDamageListener implements Listener {
 	public void onEntityDamage(EntityDamageEvent event) {
 		//any other player will get damage
 		if (event.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) {
-			if (!this.players.isEmpty()) {
+			if (!players.isEmpty()) {
 				if (event.getEntityType() == EntityType.PLAYER ) {
 					Player player = (Player) event.getEntity();
-					if (this.players.contains(player.getName())) {
+					if (players.contains(player.getName())) {
 						event.setCancelled(true);
-						this.players.remove(player.getName());
+						players.remove(player.getName());
 					}
 				}else{
 					event.setCancelled(true);
