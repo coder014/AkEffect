@@ -28,5 +28,6 @@ public class AkEffect extends JavaPlugin {
 		this.getCommand("fuckme").setExecutor(new CommandFuckme(this));
 		this.getCommand("shazam").setExecutor(new CommandShazam(this));
 		this.getCommand("rocket").setExecutor(new CommandRocket(this));
+		this.getCommand("particle4p").setExecutor(new CommandParticle(this));
 	}
 }
