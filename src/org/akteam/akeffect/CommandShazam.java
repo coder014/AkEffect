@@ -1,6 +1,10 @@
 package org.akteam.akeffect;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,21 +17,21 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public final class CommandShazam implements CommandExecutor {
 	private final JavaPlugin plugin;
-	final HashSet<PotionEffect> s = new HashSet<>(); //Shazams' list
+	private final List<PotionEffect> l = new ArrayList<>(); //potion effects list
 	public CommandShazam(JavaPlugin plugin) {
 		this.plugin = plugin;
 		
 		//initialize potion effects
-		s.add(new PotionEffect(PotionEffectType.SPEED, effectTime*20, 3));
-		s.add(new PotionEffect(PotionEffectType.REGENERATION, effectTime*20, 4));
-		s.add(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, effectTime*20, 3));
-		s.add(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, effectTime*20, 3));
-		s.add(new PotionEffect(PotionEffectType.WATER_BREATHING, effectTime*20, 1));
-		s.add(new PotionEffect(PotionEffectType.JUMP, effectTime*20, 2));
-		s.add(new PotionEffect(PotionEffectType.GLOWING, effectTime*20, 1));
-		s.add(new PotionEffect(PotionEffectType.SLOW_FALLING, effectTime*20, 1));
-		s.add(new PotionEffect(PotionEffectType.NIGHT_VISION, effectTime*20, 1));
-		s.add(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, effectTime*20, 3));
+		l.add(new PotionEffect(PotionEffectType.SPEED, effectTime*20, 3));
+		l.add(new PotionEffect(PotionEffectType.REGENERATION, effectTime*20, 4));
+		l.add(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, effectTime*20, 3));
+		l.add(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, effectTime*20, 3));
+		l.add(new PotionEffect(PotionEffectType.WATER_BREATHING, effectTime*20, 1));
+		l.add(new PotionEffect(PotionEffectType.JUMP, effectTime*20, 2));
+		l.add(new PotionEffect(PotionEffectType.GLOWING, effectTime*20, 1));
+		l.add(new PotionEffect(PotionEffectType.SLOW_FALLING, effectTime*20, 1));
+		l.add(new PotionEffect(PotionEffectType.NIGHT_VISION, effectTime*20, 1));
+		l.add(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, effectTime*20, 3));
 	}
 	
 	@Override
@@ -39,15 +43,15 @@ public final class CommandShazam implements CommandExecutor {
 		return false;
 	}
 	
-	private final HashSet<String> shazams = new HashSet<>();
-	final int effectTime = 60;
+	private final Set<String> shazams = new HashSet<>();  //Shazams list
+	private final int effectTime = 60;
 	
 	private void shazalize(Player player) {
 		if (this.canShazalize(player)) {
 			this.shazams.add(player.getName());
 			player.setFoodLevel(player.getFoodLevel() - 12);
 			player.setSaturation(0);
-			player.addPotionEffects(s);
+			player.addPotionEffects(l);
 			this.strike(player);
 			//get the powers,pay the price
 			player.sendMessage(ChatColor.BLUE + "You are a Shazam now.");
@@ -63,7 +67,7 @@ public final class CommandShazam implements CommandExecutor {
 	
 	private void unshazalize(Player player) {
 		this.shazams.remove(player.getName());
-		if (plugin.getServer().getPlayer(player.getName()) == player) {
+		if (plugin.getServer().getPlayer(player.getName()) == player) { //else player is offline
 			player.setSaturation(0);
 			player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 2*effectTime * 20, 4));
 			//pay more price
