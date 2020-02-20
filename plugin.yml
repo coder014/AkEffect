@@ -1,8 +1,8 @@
 name: AkEffect
-version: 1.4.4
-author: coder
+version: 1.4.5
+authors: [coder014,HigherSY]
 main: org.akteam.akeffect.AkEffect
-api-version: 1.14
+api-version: "1.14"
 
 commands:
   akeffect:
@@ -19,4 +19,5 @@ commands:
     usage: /rocket
   particle4p:
     description: Create some different particle effects for each player
-    usage: /particle4p
+    usage: /particle4p [change/start/stop]
+    aliases: [p4p]
