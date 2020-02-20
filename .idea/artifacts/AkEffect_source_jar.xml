@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="AkEffect-source:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/AkEffect</output-path>
+    <root id="archive" name="AkEffect-source.jar">
+      <element id="module-source" name="AkEffect" />
+      <element id="file-copy" path="$PROJECT_DIR$/plugin.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/config.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/LICENSE" />
+    </root>
+  </artifact>
+</component>

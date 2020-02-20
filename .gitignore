@@ -1,3 +1,7 @@
-/.idea
+/.idea/*
+!/.idea/artifacts
+!/.idea/misc.xml
+!/.idea/modules.xml
+!/.idea/vcs.xml
 /out
 spigot*.jar
