@@ -1,5 +1,5 @@
 name: AkEffect
-version: 1.4.5
+version: 1.4.6
 authors: [coder014,HigherSY]
 main: org.akteam.akeffect.AkEffect
 api-version: "1.14"

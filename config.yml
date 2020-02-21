@@ -3,7 +3,8 @@ rocket:
   speed: 2.0
   spread: 12.0
   height: 20
-  checktime: 10
+  agcm: 0.95
+  agcp: 0.03
 fuckme:
   power: 4.0
 Shazam:

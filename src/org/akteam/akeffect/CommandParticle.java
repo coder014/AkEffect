@@ -31,7 +31,7 @@ import org.bukkit.util.Vector;
 
 import java.util.*;
 
-public class CommandParticle implements CommandExecutor {
+public final class CommandParticle implements CommandExecutor {
 	private final Map<String, Integer> particleForPlayer = new HashMap<>();
 	private final Random rnd = new Random();
 	private final List<Particle> particles = new ArrayList<>();

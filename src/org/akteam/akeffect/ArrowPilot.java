@@ -22,14 +22,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-public class ArrowPilot extends BukkitRunnable {
+public final class ArrowPilot extends BukkitRunnable {
 	private final Arrow arrow;
 	private final Player player;
-	private final double agc;
-	public ArrowPilot(Arrow arrow, Player player, double agc) {
+	private final double agcm,agcp;
+	public ArrowPilot(Arrow arrow, Player player, double agcm, double agcp) {
 		this.arrow = arrow;
 		this.player = player;
-		this.agc = agc;
+		this.agcm = agcm;
+		this.agcp = agcp;
 	}
 	
 	@Override
@@ -54,7 +55,7 @@ public class ArrowPilot extends BukkitRunnable {
 			double yaw = Math.atan2(p.getX(), p.getZ()) - Math.atan2(v.getX(), v.getZ());
 			v.rotateAroundY(yaw);
 			//let arrow rotate as the player's visual direction changes
-			v.setY(v.getY()*agc); //anti-gravity constant
+			v.setY(v.getY()*agcm-agcp); //less gravity
 			arrow.setVelocity(v);
 		}
 	}

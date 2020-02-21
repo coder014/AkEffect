@@ -27,7 +27,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
-public class CommandRocket implements CommandExecutor {
+public final class CommandRocket implements CommandExecutor {
 	private final JavaPlugin plugin;
 	public CommandRocket(JavaPlugin plugin) {
 		this.plugin = plugin;
@@ -47,9 +47,9 @@ public class CommandRocket implements CommandExecutor {
 			arrow.addPassenger(player);
 			player.sendMessage(ChatColor.RED + "Launch!");
 			//shoot a fired arrow from above the player and make the player ride on it
-			double agc = plugin.getConfig().getDouble("rocket.agc");
-			long checktime = plugin.getConfig().getLong("rocket.checktime");
-			new ArrowPilot(arrow, player, agc).runTaskTimer(plugin, 0L, checktime);
+			double agcm = plugin.getConfig().getDouble("rocket.agcm"); //anti-gravity constant
+			double agcp = plugin.getConfig().getDouble("rocket.agcp"); //anti-gravity constant
+			new ArrowPilot(arrow, player, agcm, agcp).runTaskTimer(plugin, 0L, 1L);
 			return true;
 		}
 		return false;

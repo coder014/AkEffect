@@ -19,7 +19,7 @@ package org.akteam.akeffect;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class AkEffect extends JavaPlugin {
+public final class AkEffect extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		this.saveDefaultConfig();
