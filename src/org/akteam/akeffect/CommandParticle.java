@@ -72,7 +72,8 @@ public final class CommandParticle implements CommandExecutor {
 				}
 			}
 		};
-		task.runTaskTimer(plugin, 10L, 2L);
+		long period = plugin.getConfig().getLong("particle.period");
+		task.runTaskTimer(plugin, 10L, period);
 	}
 	
 	@Override
